@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kitefruit Konfigurator</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div id="wrapper">
+    <div id="container" class="data">
+        <main id="main">
+
+        </main>
+    </div>
+
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var menuToggle = document.getElementById('menuToggle');
+        var menuLinks = document.getElementById('menuLinks');
+        var closeMenu = document.getElementById('closeMenu');
+
+        menuToggle.addEventListener('click', function (event) {
+            event.preventDefault();
+            var isOpen = menuLinks.getAttribute('aria-hidden') === 'false';
+
+            if (isOpen) {
+                menuLinks.setAttribute('aria-hidden', 'true');
+                menuLinks.classList.remove("open");
+            } else {
+                menuLinks.setAttribute('aria-hidden', 'false');
+                menuLinks.classList.add("open");
+            }
+        });
+
+        closeMenu.addEventListener('click', function (event) {
+            event.preventDefault();
+            menuLinks.setAttribute('aria-hidden', 'true');
+            menuLinks.classList.remove("open");
+        });
+    });
+
+    function tabFocusRestrictor(menuContainerSelector, firstItemSelector) {
+        var menuContainer = document.querySelector(menuContainerSelector);
+        var firstItem = document.querySelector(firstItemSelector);
+
+        if (menuContainer && firstItem) {
+            menuContainer.addEventListener('blur', function () {
+                console.log("open");
+                if (menuContainer.classList.contains('open')) {
+                    firstItem.focus();
+                }
+            });
+        }
+    }
+
+    // Beispielaufruf für dein Menü
+    tabFocusRestrictor('#menuLinks', '#firstMenuItem');
+
+</script>
+</body>
+</html>

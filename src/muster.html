@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kitefruit Konfigurator - Step 02</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script type="module" src="../src/js/main.js"></script>
+    <script type="module" src="../src/js/muster.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+</head>
+<body>
+<header id="header">
+    <div>
+        <div class="logo-container">
+            <a id="logoLink" href="index.html">
+                <img src="/image/Logo.png" alt="Logo">
+            </a>
+        </div>
+        <div class="menu-container">
+            <a class="button" href="#">
+                <i class="fa-solid fa-download"></i>
+                Design speichern
+            </a>
+            <a><i class="fas fa-shopping-cart"></i></a>
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="sidenavContent">
+                    <p>Modell</p>
+                    <p id="modellNameSidebar">#</p>
+                    <p>Wind</p>
+                    <p id="WindSidebar">#</p>
+                </div>
+            </div>
+
+            <a onclick="openNav()"><i class="fa-solid fa-bars"></i></a>
+        </div>
+    </div>
+</header>
+<main id="main">
+    <h1>Muster</h1>
+    <p>In diesem Schritt können Sie das Muster Ihres Drachens auswählen. Sie haben die Wahl zwischen dem klassischen Triangular-Muster und dem modernen Cube-Muster.</p>
+    <div class="konfig-muster">
+    <swiper-container class="mySwiper" navigation="true" pagination="true" keyboard="true" mousewheel="true"
+                      css-mode="true">
+        <swiper-slide class="modell" valueMuster="cube">
+            <img src="/image/kite01-Muster-cube.svg" id="kiteMusterCube"/>
+        </swiper-slide>
+        <swiper-slide class="modell" valueMuster="triangular">
+            <img src="/image/kite01-Muster-tria.svg" id="kiteMusterTria"/>
+        </swiper-slide>
+    </swiper-container>
+    <img src="/image/kite01.svg" id="kiteImage"/>
+    </div>
+</main>
+<footer>
+    <a>Über Kitefruit</a>
+    <div>
+        <a>Impressum</a>
+        <a>Datenschutz</a>
+    </div>
+</footer>
+</body>
+</html>

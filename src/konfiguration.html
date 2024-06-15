@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kitefruit Konfigurator - Step 02</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script type="module" src="../src/js/main.js"></script>
+</head>
+<body>
+<header id="header">
+    <div>
+        <div class="logo-container">
+            <a id="logoLink" href="index.html">
+                <img src="/image/Logo.png" alt="Logo">
+            </a>
+        </div>
+        <div class="menu-container">
+            <a class="button" href="#">
+                <i class="fa-solid fa-download"></i>
+                Design speichern
+            </a>
+            <a><i class="fas fa-shopping-cart"></i></a>
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="sidenavContent">
+                    <p>Modell</p>
+                    <p id="modellNameSidebar">#</p>
+                </div>
+            </div>
+
+            <a onclick="openNav()"><i class="fa-solid fa-bars"></i></a>
+        </div>
+    </div>
+</header>
+<main id="main">
+    <h1>Allgemeine Wind-Konfiguration</h1>
+    <p>Bitte wählen Sie hier die geeignete Windstärkenkonfiguration für Ihren Drachen aus, um eine optimale Flugleistung zu gewährleisten: Standard-Drachen für moderate Windbedingungen, Midvented-Drachen für mäßige bis stärkere Winde und Vented-Drachen für sehr windige Verhältnisse.</p>
+
+    <div class="konfig-wind">
+        <div class="modell" valueWind="standard">
+            <div>
+                <i class="fa-solid fa-wind"></i>
+            </div>
+            <h2>Standard</h2>
+            <p>Standard-Drachen sind ideal für moderate Windbedingungen und bieten eine stabile Flugleistung bei durchschnittlichen Windstärken.</p>
+            <a class="button" href="#">
+                jetzt konfigurieren
+            </a>
+        </div>
+        <div class="modell" valueWind="midvent">
+            <div>
+                <i class="fa-solid fa-wind"></i> <i class="fa-solid fa-wind"></i>
+            </div>
+            <h2>Midvented</h2>
+            <p>Midvented-Drachen sind für mäßige bis stärkere Windverhältnisse geeignet, da sie teilweise belüftet sind und somit besser kontrollierbar bleiben.</p>
+            <a class="button" href="#">
+                jetzt konfigurieren
+            </a>
+        </div>
+        <div class="modell" valueWind="vented">
+            <div>
+                <i class="fa-solid fa-wind"></i> <i class="fa-solid fa-wind"></i> <i class="fa-solid fa-wind"></i>
+            </div>
+            <h2>Vented</h2>
+            <p>Vented-Drachen sind für starke Winde konzipiert, da ihre umfassende Belüftung eine stabile Fluglage auch bei hohen Windgeschwindigkeiten ermöglicht.</p>
+            <a class="button" href="#">
+                jetzt konfigurieren
+            </a>
+        </div>
+    </div>
+</main>
+<footer>
+    <a>Über Kitefruit</a>
+    <div>
+        <a>Impressum</a>
+        <a>Datenschutz</a>
+    </div>
+</footer>
+</body>
+<script>
+    const selectedModell = localStorage.getItem("Modell");
+    document.getElementById("modellNameSidebar").innerHTML = selectedModell;
+    let sidebarState = localStorage.getItem("sidebarState");
+
+    if (sidebarState === "open") {
+        openNav();
+    }
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginRight = "250px";
+        document.getElementById("header").style.marginRight = "250px";
+        localStorage.setItem("sidebarState", "open");
+    }
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginRight = "0";
+        document.getElementById("header").style.marginRight = "0";
+        localStorage.setItem("sidebarState", "closed");
+    }
+</script>
+</html>

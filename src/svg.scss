@@ -1,0 +1,179 @@
+svg.unvisable {
+  display: none;
+}
+
+.konfig-color {
+  position: relative;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .modell {
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 2.5;
+  }
+}
+
+svg.verstaerkung {
+  position: absolute;
+  top: 0;
+}
+
+$colors: (
+        "white": #FFFFFF,
+        "black": #000000,
+        "red": #FF0000,
+        "gray": #808080,
+        "anthrazit": #353535,
+        "yellow": #FFFF00,
+        "gold": #FFD700,
+        "orange": #FFA500,
+        "lightblue": #ADD8E6,
+        "blue": #0000FF,
+        "darkblue": #00008B,
+        "bluegreen": #0D98BA,
+        "lila": #800080,
+        "green": #008000,
+        "cedar": #4B3621,
+        "neonyellow": #CCFF00,
+        "neongreen": #39FF14,
+        "neonpink": #FF6EC7,
+        "neonorange": #FF6700
+);
+
+@mixin generate-color-classes($prefix, $color-map) {
+  @each $name, $color in $color-map {
+    &.#{$prefix}-#{$name} {
+      svg {
+        #Farbe01, #Farbe02, #Farbe03 {
+          polygon {
+            fill: #{$color};
+          }
+        }
+      }
+
+      &.f1-#{$name} {
+        svg {
+          #Farbe01, #Farbe02, #Farbe03 {
+            polygon {
+              fill: #{$color} !important;
+            }
+          }
+        }
+      }
+
+      &.f2-#{$name} {
+        svg {
+          #Farbe02 polygon {
+            fill: #{$color} !important;
+          }
+        }
+        .kite01Tria {
+          #Farbe02 polygon, #Farbe02 polyline, path {
+            fill: #{$color} !important;
+          }
+        }
+      }
+
+      &.f3-#{$name} {
+        svg {
+          #Farbe03 polygon {
+            fill: #{$color} !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Generiere die Farbklassen für einfarbig, zweifarbig und dreifarbig
+.konfig-color .modell {
+  &.einfarbig, &.zweifarbig, &.dreifarbig {
+    @include generate-color-classes(f1, $colors);
+    @include generate-color-classes(f2, $colors);
+    @include generate-color-classes(f3, $colors);
+  }
+}
+
+.kite01Tria #Farbe01 polygon, #Farbe01 polyline, #Farbe02 polygon, #Farbe02 polyline, path {
+  stroke-width: 2px !important;
+}
+
+main.color {
+  display: grid;
+  grid-template-columns: 1fr 0.25fr;
+  grid-gap: 30px;
+
+  .right-column {
+    color: #fff;
+    background: #292929;
+    padding: 10px 20px;
+    filter: drop-shadow(2px 17px 19px rgba(0, 0, 0, 0.09));
+    border-radius: 12px;
+
+    select {
+      width: 100%;
+    }
+
+    p {
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .color-button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      border: 1px solid #fff;
+    }
+
+    .color-button.selected::after {
+      content: '\2713';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 18px;
+    }
+
+    .color-button.white.selected::after {
+      color: #000;
+    }
+
+    .color-button.red { background-color: #FF0000; }
+    .color-button.white { background-color: #FFFFFF; }
+    .color-button.black { background-color: #000000; }
+    .color-button.gray { background-color: #808080; }
+    .color-button.anthrazit { background-color: #353535; }
+    .color-button.yellow { background-color: #FFFF00; }
+    .color-button.gold { background-color: #FFD700; }
+    .color-button.orange { background-color: #FFA500; }
+    .color-button.lightblue { background-color: #ADD8E6; }
+    .color-button.blue { background-color: #0000FF; }
+    .color-button.darkblue { background-color: #00008B; }
+    .color-button.bluegreen { background-color: #0D98BA; }
+    .color-button.lila { background-color: #800080; }
+    .color-button.green { background-color: #008000; }
+    .color-button.cedar { background-color: #4B3621; }
+    .color-button.neonyellow { background-color: #CCFF00; }
+    .color-button.neongreen { background-color: #39FF14; }
+    .color-button.neonpink { background-color: #FF6EC7; }
+    .color-button.neonorange { background-color: #FF6700; }
+  }
+}

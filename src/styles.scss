@@ -1,0 +1,137 @@
+@import "muster";
+@import "svg";
+@import "modell";
+
+header {
+  background-color: #292929;
+  transition: margin-right .5s;
+  padding: 20px;
+
+  div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-container {
+      width: 150px;
+
+      img {
+        object-fit: contain;
+        width: 100%;
+      }
+    }
+
+    .menu-container {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+      color: #fff;
+
+      .button {
+        background: #fff;
+        padding: 10px;
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+body {
+  margin: 0;
+  background-color: #E3E3E3;
+}
+
+h1, h2 {
+  font-family: Futura, "Times New Roman", serif;
+  font-weight: normal;
+}
+
+p, a {
+  font-family: Inter;
+  line-height: 1.35;
+}
+
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  color: #fff;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
+  .sidenavContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding-left: 30px;
+
+
+    p {
+      margin: 0;
+
+      &:nth-child(2n+1) {
+        font-size: 22px;
+      }
+
+      &:nth-child(2n) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+    &:hover {
+      color: #f1f1f1;
+    }
+  }
+
+  .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+}
+
+footer {
+  background-color: #292929;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+  font-size: 12px;
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 60px);
+
+  a:hover {
+    color: #D5FD87;
+  }
+}
+
+main {
+  max-width: 1250px;
+  margin: auto;
+  transition: margin-right .5s;
+  padding: 20px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
