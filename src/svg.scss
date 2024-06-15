@@ -17,7 +17,7 @@ svg.unvisable {
   }
 }
 
-.farbe.invisible {
+.farbe.invisible, .color-button.invisible {
   display: none;
 }
 
@@ -95,7 +95,7 @@ $colors: (
 
 // Generiere die Farbklassen für einfarbig, zweifarbig und dreifarbig
 .konfig-color .modell {
-  &.einfarbig, &.zweifarbig, &.dreifarbig {
+  &.single, &.double, &.triple {
     @include generate-color-classes(f1, $colors);
     @include generate-color-classes(f2, $colors);
     @include generate-color-classes(f3, $colors);

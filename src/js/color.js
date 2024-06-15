@@ -64,7 +64,7 @@ const ACTIVE_COLOR_PICKER_INDICES = {
     triple: ["1","2","3"]
 }
 
-let availableColors = [
+let AVAILABLE_COLORS = [
     {name: 'red', hex: '#FF0000'},
     {name: 'white', hex: '#FFFFFF'},
     {name: 'black', hex: '#000000'},
@@ -86,66 +86,167 @@ let availableColors = [
     {name: 'neonorange', hex: '#FF6700'}
 ];
 
-let selectedColor1 = null;
-let selectedColor2 = null;
-let selectedColor3 = null;
-
-
-// 1. Farbe 1 Buttons anzeigen
-// selectedColors anzeigen
-
-// 2. Farbe 1 auswählen
-// availableColors updaten
-// selectedColor1 setzen
-
-// 3. Farbe 2 Buttons anzeigen
-// selectedColors anzeigen
-
-// 4. Farbe 2 auswählen
-// availableColors updaten
-// selectedColor3 setzen
-
-// 5. Farbe 3 Buttons anzeigen
-// selectedColors anzeigen
-
-// 6. Farbe 3 auswählen
-// availableColors updaten
-// selectedColor3 setzen
+let selectedColors = {
+    color1: null,
+    color2: null,
+    color3: null
+}
 
 function createColorButtons(colorPickerId) {
     const colorPicker = document.getElementById(colorPickerId);
+    const colorPickerIndex = getColorPickerIndex(colorPicker);
 
-    availableColors.forEach(color => {
+    AVAILABLE_COLORS.forEach(color => {
+
         const button = document.createElement('div');
         button.className = `color-button ${color.name}`;
         button.style.backgroundColor = color.hex;
-        // button.onclick = () => selectColor(colorPickerId, color.name, button);
+        button.onclick = () => onSelectColor(colorPickerIndex, color.name, button);
         colorPicker.appendChild(button);
     });
 }
 
+// checks if the specified color is selected in a different color picker than the one with the given index
+function isColorSelectedElsewhere(color, colorPickerIndex){
+    for (let key in selectedColors){
+        if(selectedColors.hasOwnProperty(key) && selectedColors[key]){
+            // if this color is selected in another color picker
+            if(selectedColors[key].name === color.name && key[key.length-1] !== colorPickerIndex){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function onSelectColor(colorPickerIndex, colorName, button){
+    // find corresponding color object in AVAILABLE_COLORS and set it as a selectedColor according to the colorPickerIndex
+    selectedColors[`color${colorPickerIndex}`] = AVAILABLE_COLORS.find((color) => color.name === colorName)
+    updateColorButtons(colorPickerIndex);
+    button.classList.add("selected");
+    changeSVGColors();
+}
+
+function updateColorButtons(currentColorPickerIndex){
+    // get all colorPickers
+    const colorPickers = document.querySelectorAll(".color-picker");
+
+    // iterate over colorPickers
+    colorPickers.forEach(colorPicker => {
+
+        // get current color Picker index and all children buttons
+        const colorPickerIndex = getColorPickerIndex(colorPicker);
+        const colorButtons = Array.from(colorPicker.children);
+
+        // iterate over every available color to check whether it should be displayed by this color picker
+        AVAILABLE_COLORS.forEach(color => {
+            const correspondingButton = colorButtons.find(button => button.classList.contains(color.name));
+            const colorAlreadyChosen = isColorSelectedElsewhere(color, colorPickerIndex)
+            // if button exists, but color is already chosen, make button invisible
+            if(correspondingButton && colorAlreadyChosen){
+                correspondingButton.classList.add("invisible");
+            } else {
+                correspondingButton.classList.remove("invisible");
+            }
+        })
+
+        // remove "selected" class from buttons which are not selected in the current color picker
+        if(colorPickerIndex === currentColorPickerIndex || colorPickerIndex === 0){
+            colorButtons.forEach(button => button.classList.remove("selected"))
+        }
+    })
+}
+
 // function, which is called when "Farbschema" select changes
-function onSelectColorChange(){
+function onColorSchemeChange(){
     const select = document.querySelector("#FarbSchemaSidebar");
     const selectValue = select.value;
     updateColorOptions(selectValue);
+    removeSelectedClassFromButtons(selectValue);
+    changeModellClass(selectValue);
+    changeSVGColors()
 }
 
 function updateColorOptions(selectValue){
     // map selectValue to visible colorpicker indices and get all colorPickers
     const activeColorPickerIndices = ACTIVE_COLOR_PICKER_INDICES[selectValue];
-    const colorPickers = document.querySelectorAll(".farbe")
-
+    const colorPickerContainers = document.querySelectorAll(".farbe")
+    console.log(`Folgende Farben zur Auswahl werden angezeigt: ${activeColorPickerIndices}`)
     // iterate over colorPickers and set unvisable if index is not in activeColorPickerIndices
-    colorPickers.forEach((colorPicker) => {
+    colorPickerContainers.forEach((colorPicker) => {
         // get index: e.g. "farbeSelect1" -> "1"
-        const colorPickerIndex = colorPicker.id[colorPicker.id.length-1];
+        const colorPickerIndex = getColorPickerIndex(colorPicker)
 
         // set invisible class accordingly
         if(activeColorPickerIndices.includes(colorPickerIndex)){
             colorPicker.classList.remove("invisible");
         }else{
             colorPicker.classList.add("invisible");
+            removeSelectedColor(colorPickerIndex)
         }
+    })
+}
+
+// removes the "selected" class from buttons if color picker is not shown
+function removeSelectedClassFromButtons(selectValue){
+    const activeColorPickerIndices = ACTIVE_COLOR_PICKER_INDICES[selectValue];
+    const colorPickers = document.querySelectorAll(".color-picker")
+    colorPickers.forEach(colorPicker => {
+        const colorPickerIndex = getColorPickerIndex(colorPicker);
+
+        // remove button selected class for every color picker which is not shown
+        if (!activeColorPickerIndices.includes(colorPickerIndex)){
+            const colorButtons = Array.from(colorPicker.children);
+            colorButtons.forEach(button => {
+                button.classList.remove("selected");
+            })
+        }
+    })
+}
+
+// changes class of the modell div to the selectedValue
+// e.g. user selects "single" and modell classes are ["double", "modell"] -> it sets modell classes to ["single", "modell"]
+function changeModellClass(selectValue){
+    const modellElement = document.querySelector(".konfig-color .modell");
+    const possibleClasses = ["single", "double", "triple"].filter(value => value !== selectValue);
+    possibleClasses.forEach(possibleClass => modellElement.classList.remove(possibleClass));
+    modellElement.classList.add(selectValue);
+}
+
+// changes SVG colors of the kite based on the selectedColors
+function changeSVGColors(){
+    const modellElement = document.querySelector(".konfig-color .modell");
+
+    // iterate over each selected color
+    for (let key in selectedColors){
+        const colorNumber = key[key.length-1]; // current color e.g. "color1" -> "1"
+
+        // remove class for current color number
+        // e.g. if current color is "color2", the class "f2-yyy" is removed from the modellElement
+        const classToRemove = Array.from(modellElement.classList).filter(className => className.startsWith(`f${colorNumber}`));
+        if(classToRemove){
+            modellElement.classList.remove(classToRemove[0]);
+        }
+
+        // if a color is selected, add the new class to the modellElement
+        if(selectedColors[key]){
+            modellElement.classList.add(`f${colorNumber}-${selectedColors[key].name}`)
+        }
+    }
+}
+
+function getColorPickerIndex(colorPicker){
+    return colorPicker.id[colorPicker.id.length-1];
+}
+
+function removeSelectedColor(index){
+    selectedColors[`color${index}`] = null;
+}
+
+function updateSelectableColors(){
+    const colorPickers = document.querySelectorAll(".farbe");
+    colorPickers.forEach((colorPicker) => {
+        const colorPickerIndex = getColorPickerIndex(colorPicker);
+        createColorButtons(colorPicker.id)
     })
 }
