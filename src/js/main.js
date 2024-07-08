@@ -1,5 +1,7 @@
 import '/src/styles.scss';
 
+let exportButton = document.getElementById('exportButton');
+
 document.querySelectorAll(".modell:not(.disabled)").forEach(modell => {
     modell.addEventListener("click", function() {
         if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
@@ -53,3 +55,32 @@ const ModellDTO = {
         return this.selectedModell;
     }
 };
+
+if(exportButton) {
+    exportButton.addEventListener('click', function() {
+        // Lese den gesamten Inhalt des localStorage
+        const localStorageContent = {};
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            localStorageContent[key] = localStorage.getItem(key);
+        }
+
+        // Konvertiere den Inhalt in JSON-Format
+        const jsonContent = JSON.stringify(localStorageContent, null, 2);
+
+        // Erstelle eine Blob-Datei aus dem JSON-Inhalt
+        const blob = new Blob([jsonContent], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        // Erstelle einen temporären Link und triggere den Download
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'localStorage.json';
+        document.body.appendChild(a);
+        a.click();
+
+        // Entferne den temporären Link
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+}

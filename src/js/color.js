@@ -5,15 +5,17 @@ document.getElementById("WindSidebar").innerHTML = selectedWind;
 const selectedMuster = localStorage.getItem("Muster");
 document.getElementById("MusterSidebar").innerHTML = selectedMuster;
 
+localStorage.removeItem("Farbe 1");
+localStorage.removeItem("Farbe 2");
+localStorage.removeItem("Farbe 3");
+localStorage.removeItem("Farbe 4");
+localStorage.removeItem("Farbe 5");
+localStorage.removeItem("Farbe 6");
+
 document.addEventListener('DOMContentLoaded', function () {
     const kiteImage = document.getElementById('kiteImage');
     const modelValue = localStorage.getItem("Modell");
     const musterValue = localStorage.getItem("Muster");
-    let sidebarState = localStorage.getItem("sidebarState");
-
-    if (sidebarState === "open") {
-        openNav();
-    }
 
     // check against lower case to prevent case sensitivity
     switch(modelValue.toLowerCase()){
@@ -122,6 +124,7 @@ function isColorSelectedElsewhere(color, colorPickerIndex){
 function onSelectColor(colorPickerIndex, colorName, button){
     // find corresponding color object in AVAILABLE_COLORS and set it as a selectedColor according to the colorPickerIndex
     selectedColors[`color${colorPickerIndex}`] = AVAILABLE_COLORS.find((color) => color.name === colorName)
+    localStorage.setItem(`Farbe ${colorPickerIndex}`, colorName);
     updateColorButtons(colorPickerIndex);
     button.classList.add("selected");
     changeSVGColors();

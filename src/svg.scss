@@ -26,6 +26,11 @@ svg.verstaerkung {
   top: 0;
 }
 
+p.legende {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
 $colors: (
         "white": #FFFFFF,
         "black": #000000,
@@ -89,17 +94,86 @@ $colors: (
           }
         }
       }
+
+      &.f4-#{$name} {
+
+        &.midvent {
+          .kite01Cube #Farbe02 {
+            #top-17, #top-20, #top-19, #top-18 {
+              fill: #{$color} !important;
+              opacity: 0.85;
+            }
+          }
+
+          .kite02Cube {
+            #midvented, #midvented-2, #midvented-3, #midvented-4 {
+              fill: #{$color} !important;
+              opacity: 0.85;
+            }
+          }
+        }
+
+        &.vented {
+          .kite01Cube #Farbe02 {
+            #top-17, #top-20, #top-19, #top-18, #top-21, #top-22 {
+              fill: #{$color} !important;
+              opacity: 0.85;
+            }
+          }
+
+          .kite02Cube {
+            #top-2, #top, #top-3, #top-4, #midvented-2, #midvented-3 {
+              fill: #{$color} !important;
+              opacity: 0.85;
+            }
+          }
+        }
+      }
+
+      &.f5-#{$name} {
+        .kite01Cube #Farbe01 polygon, .kite01Cube #Farbe02 polygon, .kite01Cube #Farbe03 polygon {
+          stroke: #{$color} !important;
+        }
+
+        .kite02Cube {
+          #Farbe01, #Farbe02, #Farbe03 {
+            polygon {
+              stroke: #{$color} !important;
+            }
+          }
+        }
+      }
+
+      &.f6-#{$name} {
+        svg {
+          #verstaerkung polygon, #Drachen polygon {
+            fill: #{$color} !important;
+            stroke: #{$color} !important;
+          }
+
+          #verstaerkung path, #Drachen path {
+            stroke: #{$color} !important;
+          }
+
+          #Drachen .cls-7 {
+            display: none !important;
+          }
+        }
+      }
     }
   }
 }
 
 // Generiere die Farbklassen für einfarbig, zweifarbig und dreifarbig
 .konfig-color .modell {
-  &.single, &.double, &.triple {
+  // &.single, &.double, &.triple {
     @include generate-color-classes(f1, $colors);
     @include generate-color-classes(f2, $colors);
     @include generate-color-classes(f3, $colors);
-  }
+    @include generate-color-classes(f4, $colors);
+    @include generate-color-classes(f5, $colors);
+    @include generate-color-classes(f6, $colors);
+  // }
 }
 
 .kite01Tria #Farbe01 polygon, #Farbe01 polyline, #Farbe02 polygon, #Farbe02 polyline, path {
@@ -108,22 +182,36 @@ $colors: (
 
 main.color {
   display: grid;
-  grid-template-columns: 1fr 0.25fr;
+  grid-template-columns: 1fr 250px;
   grid-gap: 30px;
+  padding-bottom: 100px;
 
   .right-column {
     color: #fff;
+    position: relative;
     background: #292929;
     padding: 10px 20px;
     filter: drop-shadow(2px 17px 19px rgba(0, 0, 0, 0.09));
-    border-radius: 12px;
+    border-radius: 17px;
+    height: calc(100vh - 280px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .column-content {
+      height: 90%;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
 
     select {
       width: 100%;
     }
 
     p {
-      margin-top: 30px;
       margin-bottom: 10px;
     }
 
