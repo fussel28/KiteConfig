@@ -4,10 +4,7 @@ let exportButton = document.getElementById('exportButton');
 
 document.querySelectorAll(".modell:not(.disabled)").forEach(modell => {
     modell.addEventListener("click", function() {
-        console.log("clicked");
-
         if (window.location.href.includes("index.html") || window.location.pathname === "/") {
-            console.log("clicked 2");
             const selectedModellName = this.getAttribute("valueModell");
             ModellDTO.setSelectedModell(selectedModellName);
             localStorage.setItem("Modell", selectedModellName);
