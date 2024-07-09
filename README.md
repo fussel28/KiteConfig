@@ -16,7 +16,7 @@ Betreuer: M. Sc. Micha Kodalle
 4. Viel Spaß!
 
 ## Benutzung
-Nach dem Start der Anwendung wird im Browser: `http://localhost:3000` geöffnet. Folge den Anweisungen auf dem Bildschirm, um deinen eigenen Drachen zu konfigurieren.
+Nach dem Start der Anwendung wird im Browser: `http://localhost:8080` geöffnet. Folge den Anweisungen auf dem Bildschirm, um deinen eigenen Drachen zu konfigurieren.
 
 ## Quellen
 - **Schriftarten:**
