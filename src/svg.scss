@@ -201,10 +201,6 @@ main.color {
     .column-content {
       height: 90%;
       overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
 
     select {

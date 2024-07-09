@@ -100,12 +100,14 @@ footer {
   justify-content: space-between;
   padding: 20px 30px;
   font-size: 12px;
-  position: static;
-  bottom: 0;
-  width: calc(100% - 60px);
   border-top-left-radius: 17px;
   border-top-right-radius: 17px;
   filter: drop-shadow(2px 17px 19px rgba(0, 0, 0, 0.12));
+  position: absolute;
+  width: calc(100vw - 60px);
+  height: 15px;
+  left: 0;
+  bottom: 0;
 
   a:hover {
     color: #D5FD87;
@@ -113,10 +115,11 @@ footer {
 }
 
 main {
-  min-height: calc(100vh - 255px);
+  position: relative;
+  min-height: 100vh;
   margin: auto;
   transition: margin-right .5s;
-  padding: 20px 40px 40px;
+  padding: 5px 40px 40px;
 }
 
 .button {
