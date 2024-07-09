@@ -19,25 +19,25 @@
             </a>
         </div>
         <div class="menu-container">
-            <a class="button" href="#">
+            <a class="button" href="#" id="exportButton">
                 <i class="fa-solid fa-download"></i>
                 Design speichern
             </a>
-            <a><i class="fas fa-shopping-cart"></i></a>
-
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <div class="sidenavContent">
-                    <p>Modell</p>
-                    <p id="modellNameSidebar">#</p>
-                </div>
-            </div>
-
-            <a onclick="openNav()"><i class="fa-solid fa-bars"></i></a>
         </div>
     </div>
 </header>
 <main id="main">
+    <div id="mySidenav" class="sidenav">
+        <div class="sidenavContent">
+            <a href="index.html" class="next">
+                <p>Modell:</p>
+                <p id="modellNameSidebar">#</p>
+            </a>
+            <a href="#">
+                <p class="active">Wind</p>
+            </a>
+        </div>
+    </div>
     <h1>Allgemeine Wind-Konfiguration</h1>
     <p>Bitte wählen Sie hier die geeignete Windstärkenkonfiguration für Ihren Drachen aus, um eine optimale Flugleistung zu gewährleisten: Standard-Drachen für moderate Windbedingungen, Midvented-Drachen für mäßige bis stärkere Winde und Vented-Drachen für sehr windige Verhältnisse.</p>
 
@@ -73,37 +73,17 @@
             </a>
         </div>
     </div>
+    <footer>
+        <a>Über Kitefruit</a>
+        <div>
+            <a>Impressum</a>
+            <a>Datenschutz</a>
+        </div>
+    </footer>
 </main>
-<footer>
-    <a>Über Kitefruit</a>
-    <div>
-        <a>Impressum</a>
-        <a>Datenschutz</a>
-    </div>
-</footer>
 </body>
 <script>
     const selectedModell = localStorage.getItem("Modell");
     document.getElementById("modellNameSidebar").innerHTML = selectedModell;
-    let sidebarState = localStorage.getItem("sidebarState");
-
-    if (sidebarState === "open") {
-        openNav();
-    }
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginRight = "250px";
-        document.getElementById("header").style.marginRight = "250px";
-        localStorage.setItem("sidebarState", "open");
-    }
-
-    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginRight = "0";
-        document.getElementById("header").style.marginRight = "0";
-        localStorage.setItem("sidebarState", "closed");
-    }
 </script>
 </html>

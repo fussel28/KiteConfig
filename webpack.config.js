@@ -71,6 +71,11 @@ module.exports = {
             chunks: ['main', 'common'],
         }),
         new HtmlWebpackPlugin({
+            template: 'src/stuff.html',
+            filename: 'stuff.html',
+            chunks: ['main', 'common'],
+        }),
+        new HtmlWebpackPlugin({
             template: 'src/404.html',
             filename: '404.html',
             chunks: ['main', 'common'],
