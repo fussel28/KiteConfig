@@ -10,7 +10,7 @@ Betreuer: M. Sc. Micha Kodalle
 5. [Mitwirkende](#mitwirkende)
 
 ## Installationsanleitung
-1. Repository klonen: `https://github.com/fussel28/KiteConfig/`
+1. Repository klonen: [`https://github.com/fussel28/KiteConfig/`](https://github.com/fussel28/KiteConfig.git)
 2. Abhängigkeiten installieren: `npm install`
 3. Anwendung starten: `npm run start`
 4. Viel Spaß!
