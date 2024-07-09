@@ -6,6 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         main: './src/js/main.js',
+        color: './src/js/color.js',
+        muster: './src/js/muster.js',
+        stuff: './src/js/stuff.js'
     },
     resolve: {
         fallback: {
@@ -63,17 +66,17 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/muster.html',
             filename: 'muster.html',
-            chunks: ['main', 'common'],
+            chunks: ['muster', 'main'],
         }),
         new HtmlWebpackPlugin({
             template: 'src/color.html',
             filename: 'color.html',
-            chunks: ['main', 'common'],
+            chunks: ['color', 'main'],
         }),
         new HtmlWebpackPlugin({
             template: 'src/stuff.html',
             filename: 'stuff.html',
-            chunks: ['main', 'common'],
+            chunks: ['stuff', 'main'],
         }),
         new HtmlWebpackPlugin({
             template: 'src/404.html',

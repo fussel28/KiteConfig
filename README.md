@@ -14,6 +14,7 @@ Betreuer: M. Sc. Micha Kodalle
 2. Abhängigkeiten installieren: `npm install`
 3. Anwendung starten: `npm run start`
 4. Viel Spaß!
+5. Projekt auf Webserver unter `https://informatik.th-brandenburg.de/~wolffann/index.html`
 
 ## Benutzung
 Nach dem Start der Anwendung wird im Browser: `http://localhost:8080` geöffnet. Folge den Anweisungen auf dem Bildschirm, um deinen eigenen Drachen zu konfigurieren.
