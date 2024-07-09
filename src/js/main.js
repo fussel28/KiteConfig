@@ -24,8 +24,6 @@ document.querySelectorAll(".modell:not(.disabled)").forEach(modell => {
             window.location.href = "color.html";
         }
 
-        console.log(ModellDTO);
-
     });
 });
 
@@ -38,17 +36,14 @@ const ModellDTO = {
     // Funktion zum Setzen des ausgewählten Modells
     setSelectedModell: function(modellName) {
         this.selectedModell = modellName;
-        console.log(modellName);
     },
 
     setSelectedWind: function(windName) {
         this.selectedWind = windName;
-        console.log(windName);
     },
 
     setSelectedMuster: function(musterName) {
         this.selectedWind = musterName;
-        console.log(musterName);
     },
 
     getSelectedModell: function() {

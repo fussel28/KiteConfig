@@ -174,7 +174,7 @@ function updateColorOptions(selectValue){
     // map selectValue to visible colorpicker indices and get all colorPickers
     const activeColorPickerIndices = ACTIVE_COLOR_PICKER_INDICES[selectValue];
     const colorPickerContainers = document.querySelectorAll(".farbe")
-    console.log(`Folgende Farben zur Auswahl werden angezeigt: ${activeColorPickerIndices}`)
+
     // iterate over colorPickers and set unvisable if index is not in activeColorPickerIndices
     colorPickerContainers.forEach((colorPicker) => {
         // get index: e.g. "farbeSelect1" -> "1"

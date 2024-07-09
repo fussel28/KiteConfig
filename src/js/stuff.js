@@ -164,9 +164,7 @@ function isValidEmail(email) {
 }
 
 const userEmail = localStorage.getItem("Mail");
-console.log(userEmail);
 
-// Initialisiere EmailJS
 emailjs.init('tDCOHFttzjT_Txkgh');
 
 saveAndSendEmailButton.addEventListener('click', function() {
@@ -194,14 +192,12 @@ saveAndSendEmailButton.addEventListener('click', function() {
     else {
         let message = createMessage();
 
-        // Erstelle die Parameter für EmailJS
         const emailParams = {
-            to_email: 'fusselowska@gmail.com', // Hier die E-Mail-Adresse des Empfängers einfügen
-            from_name: 'userEmail', // Hier den Namen des Absenders einfügen
-            message_html: `<pre>${message}</pre>` // Verwende <pre>, um das JSON-Format beizubehalten
+            to_email: 'fusselowska@gmail.com',
+            from_name: 'userEmail',
+            message_html: `<pre>${message}</pre>`
         };
 
-        // Sende die E-Mail mit EmailJS
         emailjs.send('service_zm3rwgn', 'template_lucpwau', emailParams)
             .then(function(response) {
                     alert('Email wurde erfolgreich gesendet');
@@ -217,7 +213,6 @@ saveAndSendEmailButton.addEventListener('click', function() {
 function applyStoredColors() {
     for (let i = 1; i <= 6; i++) {
         const color = localStorage.getItem(`Farbe ${i}`);
-        console.log(color);
 
         if (color) {
             const modellElement = document.querySelector(`.konfig-color .modell`);
