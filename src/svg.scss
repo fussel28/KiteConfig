@@ -64,16 +64,6 @@ $colors: (
         }
       }
 
-      &.f1-#{$name} {
-        svg {
-          #Farbe01, #Farbe02, #Farbe03 {
-            polygon {
-              fill: #{$color} !important;
-            }
-          }
-        }
-      }
-
       &.f2-#{$name} {
         svg {
           #Farbe02 polygon {
@@ -95,6 +85,23 @@ $colors: (
         }
       }
 
+
+      &.f1-#{$name} {
+        svg {
+          #Farbe01, #Farbe02, #Farbe03 {
+            polygon {
+              fill: #{$color} !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin  generate-color-stuff($prefix, $color-map) {
+  @each $name, $color in $color-map {
+    &.#{$prefix}-#{$name} {
       &.f4-#{$name} {
 
         &.midvent {
@@ -170,11 +177,14 @@ $colors: (
     @include generate-color-classes(f1, $colors);
     @include generate-color-classes(f2, $colors);
     @include generate-color-classes(f3, $colors);
-    @include generate-color-classes(f4, $colors);
-    @include generate-color-classes(f5, $colors);
-    @include generate-color-classes(f6, $colors);
   // }
 }
+
+.konfig-color .modell {
+    @include generate-color-stuff(f4, $colors);
+    @include generate-color-stuff(f5, $colors);
+    @include generate-color-stuff(f6, $colors);
+  }
 
 .kite01Tria #Farbe01 polygon, #Farbe01 polyline, #Farbe02 polygon, #Farbe02 polyline, path {
   stroke-width: 2px !important;
@@ -264,4 +274,8 @@ main.color {
     .color-button.neonpink { background-color: #FF6EC7; }
     .color-button.neonorange { background-color: #FF6700; }
   }
+}
+
+.konfig-color .modell.f5-neonorange.f1-neonorange svg #Farbe02 polygon, .konfig-color .modell.f5-neonorange.f1-neonorange svg #Farbe03 polygon {
+  // fill: transparent !important;
 }
