@@ -1,6 +1,13 @@
 @import "svg";
 @import "modell";
 
+@font-face {
+  font-family: 'Futura';
+  src: url('../src/assets/fonts/futura-medium-bt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 header {
   background-color: #292929;
   transition: margin-right .5s;

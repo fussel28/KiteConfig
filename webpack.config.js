@@ -71,7 +71,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/color.html',
             filename: 'color.html',
-            chunks: ['color', 'main'],
+            chunks: ['main', 'main'],
         }),
         new HtmlWebpackPlugin({
             template: 'src/stuff.html',
