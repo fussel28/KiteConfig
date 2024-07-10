@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // check against lower case to prevent case sensitivity
     switch(modelValue.toLowerCase()){
-        case 'rev':
+        case 'kf-1.5':
             document.querySelector(".kite02Umrandung").classList.add("unvisable");
             document.querySelector(".kite02Tria").classList.add("unvisable");
             document.querySelector(".kite02Cube").classList.add("unvisable");

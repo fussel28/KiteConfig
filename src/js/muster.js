@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modelValue = localStorage.getItem(modelKey);
 
     if (kiteImage && kiteMusterCube && kiteMusterTria) {
-        if (modelValue === 'Rev') {
+        if (modelValue === 'KF-1.5') {
             kiteImage.src = '/image/kite01.svg';
             kiteMusterCube.src = "/image/kite01-Muster-cube.svg";
             kiteMusterTria.src = "/image/kite01-Muster-tria.svg";
